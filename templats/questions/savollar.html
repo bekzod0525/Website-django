@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+    {% block contener %} 
+
+    <h1>Savollar!</h1>
+    <ol>
+        {% for savol in savollar %}
+        <li>
+              <a href="{% url 'poll:savol' id=savol.id %}">{{ savol.question }}</a>  
+        </li>
+        {% endfor %}
+    </ol>
+    {% if user.is_superuser %}
+    <a href="{% url 'poll:create' %}" class="btn btn-outline-info">Savol qo'shish</a>
+    <a href="{% url 'poll:create_choice' %}" class="btn btn-outline-info">Tanlov qo'shish</a>
+    {% endif %}
+    {% endblock contener %}
+
+    

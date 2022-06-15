@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+
+{% block contener %}
+
+<div class="class py-5">
+  <h3>{{ new.title }}</h3>
+</div>
+
+<div class="card p-5">
+  {% if new.image %}
+  <img src="{{ new.image.url }}" class="card-img-top" alt="{{ new.title }}">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ new.title }}</h5>
+    <p class="card-text">{{ new.body }}</p>
+    <span class="small badge badge-info bg-primary">{{ new.created }}</span>
+    <div class="float-end">
+        <a href="{% url 'new:remove' id=new.id %}" class="btn btn-danger">O'chirish</a>
+        <a href="{% url 'new:my_update' id=new.id %}" class="btn btn-outline-info">Yangilash</a>
+    </div>
+  </div>
+</div>        
+
+
+{% endblock contener %}

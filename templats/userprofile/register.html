@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block contener %}
+
+<div class="container py-5">
+    <form action="." method="post">
+        <h1>Ro'yxatdan o'tish</h1>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Ro'yxatdan o'tish">
+    </form>
+
+    <p class="text-center">
+        Agar akkauntingiz bor bolsa iltimos
+        <a href="/accounts/login/">Tizimga kiring</a>
+    </p>
+</div>
+
+{% endblock contener %}

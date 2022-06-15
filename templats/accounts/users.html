@@ -1,0 +1,16 @@
+      {% extends 'base.html' %}
+
+      {% block contener %} 
+
+      <h1>Users!</h1>
+      <ol>
+            {% for user in users %}
+            <li>
+                  {{ user.username }}
+            </li>
+            {% endfor %}
+      </ol>
+
+      {% endblock contener %}
+
+

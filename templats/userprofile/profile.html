@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block contener %}
+
+{% load crispy_forms_tags %}
+
+
+<div class="container py-5">
+ <h1>{{ request.user.username }}</h1>
+</div>
+
+{% endblock contener %}

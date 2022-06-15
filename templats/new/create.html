@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block contener %}
+
+<div class="class py-5">
+  <h3>Yangi post yaratish</h3>
+</div>
+
+<div class="card p-5">
+  <form action="." method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary mt-4 float-end">Saqlash</button>
+  </form>
+</div>        
+
+
+
+{% endblock contener %}

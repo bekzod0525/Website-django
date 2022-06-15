@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block contener %}
+
+<div class="row">
+  <div class="class py-5">
+    <h1>
+        Yangiliklar<small><a href="{% url 'new:my_create' %}" class="btn btn-primary float-end">QO'SHISH</a></small>
+    </h1>
+  </div>
+  {% for new in news %}
+    <div class="col-md-4">
+        <div class="card my-2">
+              {% if new.image %}
+              <img src="{{ new.image.url }}" class="card-img-top" alt="{{ new.title }}">
+              {% endif %}
+              <div class="card-body">
+              <h5 class="card-title">{{ new.title }}</h5>
+              <p class="card-text">{{ new.body|truncatewords_html:10 }}</p>
+              <a href="{% url 'new:my_detail' id=new.id %}" class="btn btn-primary">Batafsil</a>
+              <a href="{% url 'new:remove' id=new.id %}" class="btn btn-danger">O'chirish</a>
+              <a href="{% url 'new:my_update' id=new.id %}" class="btn btn-outline-info">Yangilash</a>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock contener %}

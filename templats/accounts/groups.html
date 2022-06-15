@@ -1,0 +1,16 @@
+    {% extends 'base.html' %}
+
+    {% block contener %} 
+
+    <h1>Groups!</h1>
+    <ol>
+        {% for group in groups %}
+        <li class="list-group-item">
+            <a href="{% url 'poll:edit_group' id=group.id %}" class="text-decoration-none">{{ group.name }}</a>  
+            <a href="{% url 'poll:remove_group' id=group.id %}" class="text-decoration-none btn btn-danger float-end">O'chirish</a>
+        </li>
+        {% endfor %}
+    </ol>
+    <a href="{% url 'poll:add' %}" class="btn btn-outline-info">Qo'shish</a>
+ 
+    {% endblock contener %}

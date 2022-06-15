@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+    {% block contener %} 
+
+    <h1>SAVOL: {{savol.question}}</h1>
+    <ol>
+        {% for choice in savol.choice_set.all %}
+        <li>
+            <a href="{% url 'poll:check_answer' variant_id=choice.id %}">{{ choice.choice }}</a>
+           
+        </li>
+        {% endfor %}
+    </ol>
+
+
+    {% endblock contener %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block contener %}
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for item in carusels %}
+      <div class="carousel-item active">
+        <img src="{{ item.image.url }}" class="d-block w-100" alt="{{ item.title }}">
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<div class="row mb-5">
+    <div class="class py-5">
+      <h1>Yangiliklar</h1>
+    </div>
+    {% for new in news %}
+      <div class="col-md-4">
+          <div class="card my-2">
+                {% if new.image %}
+                <img src="{{ new.image.url }}" class="card-img-top" alt="{{ new.title }}">
+                {% endif %}
+                <div class="card-body">
+                <h5 class="card-title">{{ new.title }}</h5>
+                <p class="card-text">{{ new.body|truncatewords_html:10 }}</p>
+                <a href="{% url 'new:detail' id=new.id %}" class="btn btn-primary">Batafsil</a>
+              </div>
+            </div>
+      </div>
+      {% endfor %}
+  </div>
+
+{% endblock contener %} 

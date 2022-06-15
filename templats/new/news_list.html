@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block contener %}
+
+<div class="row">
+  <div class="class py-5">
+    <h1>Yangiliklar 
+      {% if user.is_superuser %}
+      <small><a href="{% url 'new:create' %}" class="btn btn-primary float-end">QO'SHISH</a></small>
+      {% endif %}
+    </h1>
+  </div>
+  {% for new in news %}
+    <div class="col-md-4">
+        <div class="card my-2">
+              {% if new.image %}
+              <img src="{{ new.image.url }}" class="card-img-top" alt="{{ new.title }}">
+              {% endif %}
+              <div class="card-body">
+              <h5 class="card-title">{{ new.title }}</h5>
+              <p class="card-text">{{ new.body|truncatewords_html:10 }}</p>
+              <a href="{% url 'new:detail' id=new.id %}" class="btn btn-primary">Batafsil</a>
+            </div>
+          </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock contener %}
