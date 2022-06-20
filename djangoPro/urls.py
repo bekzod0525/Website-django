@@ -23,6 +23,7 @@ from .views import users_view, groups_view, home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('summernote', include('django_summernote.urls')),
     path('savollar/', include('poll.urls', namespace='poll')),
     path('accounts/', include('userprofile.urls', namespace='userprofile')),
     path('news/', include('new.urls', namespace='new')),
