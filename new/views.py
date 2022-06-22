@@ -1,8 +1,8 @@
-import re
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 
-from .models import New
+from .models import New, Like, Dislike
 from .forms import NewForm, NewFormMine, CommentForm
 
 def news_list(request):
@@ -76,3 +76,60 @@ def my_detail(request, id):
     new = get_object_or_404(New, id=id)
 
     return render(request, 'new/my_detail.html', {"new": new})
+
+
+def Like(request, id):
+    new = get_object_or_404(New, id=id)
+    if request.user.is_authenticated:
+        if new.likes.filter(user=request.user).exists():
+            new.likes.get(user=request.user).delete()
+            return JsonResponse(
+                {
+                'success': True,
+                'message': "Siz reaksiyangizni qaytarib oldingiz!",
+                'likes': new.likes.count()
+                }
+            )
+        Like.objects.create(user=request.user, post=new)
+        return JsonResponse(
+                {
+                'success': True,
+                'message': "Sizga yoqqan postlar safiga qo'shildi!",
+                'likes': new.likes.count()
+                }
+            )
+    return JsonResponse(
+                {
+                'success': False,
+                'message': "Postga reaksiya bildirish uchun iltimos ro'yhatdan o'ting!",
+                }
+            )        
+
+
+
+def Dislike(request, id):
+    new = get_object_or_404(New, id=id)
+    if request.user.is_authenticated:
+        if new.dislikes.filter(user=request.user).exists():
+            new.dislikes.get(user=request.user).delete()
+            return JsonResponse(
+                {
+                'success': True,
+                'message': "Siz reaksiyangizni qaytarib oldingiz!",
+                'dislikes': new.dislikes.count()
+                }
+            )
+        Dislike.objects.create(user=request.user, post=new)
+        return JsonResponse(
+                {
+                'success': True,
+                'message': "Sizga yoqmagan postlar safiga qo'shildi!",
+                'dislikes': new.dislikes.count()
+                }
+            )
+    return JsonResponse(
+                {
+                'success': False,
+                'message': "Postga reaksiya bildirish uchun iltimos ro'yhatdan o'ting!",
+                }
+            )

@@ -27,7 +27,7 @@
     {% for comment in new.comments.all %}
     <div class="card">
       <div class="card-header">
-       {{ new.author|default:"Anonim Foydalanuvchi" }}
+       {{ comment.author|default:"Anonim Foydalanuvchi" }}
       </div>
       <div class="card-body">
         <blockquote class="blockquote mb-0">

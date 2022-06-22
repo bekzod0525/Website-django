@@ -8,7 +8,9 @@ from .views import (
     my_news, 
     my_create, 
     my_update,
-    my_detail,    
+    my_detail, 
+    Like,
+    Dislike   
 )
 
 app_name = 'new'
@@ -20,5 +22,7 @@ urlpatterns = [
     path('my-news/', my_news, name='my_news'),
     path('my-create/', my_create, name='my_create'),
     path('my-update/<int:id>/', my_update, name='my_update'), 
-    path('my-detail/<int:id>/',  my_detail, name='my_detail'),  
+    path('my-detail/<int:id>/',  my_detail, name='my_detail'),
+    path('like/<int:id>/',  Like, name='like'),
+    path('dislike/<int:id>/',  Dislike, name='dislike'),
 ]
