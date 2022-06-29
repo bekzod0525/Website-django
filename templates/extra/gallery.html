@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block contener %}
+
+
+<div class="home">
+
+    <div class="card my-3">
+        <div class="card-header d-flex">
+            {% for item in categories %}
+            <a href="?cat={{ item.id }}" class="btn btn-outline-success mx-1">{{ item.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="demo-gallery">
+        <ul id="lightgallery" class="list-unstyled row">
+            {% for item in object_list %}
+            <li class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="{{ item.image.url }}" data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">
+                <a href="#">
+                    <img class="img-responsive" src="{{ item.image.url }}" alt="{{ item.title }}">
+                </a>
+            </li>
+            {% empty %}
+            <div class="alert alert-success" role="alert">
+                Ushbu kategoriyada rasmlar topilmadi
+              </div>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock contener %} 

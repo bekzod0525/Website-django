@@ -41,11 +41,11 @@ def groups_add(request):
        name = request.POST.get('name') 
        Group.objects.create(name=name)
        return redirect("poll:groups")
-    return render(request, 'groups_add.html')
+    return render(request, 'accounts/groups_add.html')
 
 def group(request):
     groups = Group.objects.all()
-    return render(request, 'groups.html', {'groups': groups})
+    return render(request, 'accounts/groups.html', {'groups': groups})
 
 def remove_group(request, id):
     group = get_object_or_404(Group, id=id)

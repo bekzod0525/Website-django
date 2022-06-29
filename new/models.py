@@ -23,14 +23,23 @@ class New(models.Model):
     def __str__(self):
         return self.title   
 
+
+    def dislike_count(self):
+        return self.dislikes.count()
+
+
+    def like_count(self):
+        return self.likes.count()
+    
+
 class Comment(models.Model):
     author = models.ForeignKey(
         User,
         verbose_name="Muallif",
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
-    )
+        blank=True,
+        )
     post = models.ForeignKey(
         New,
         verbose_name="Post",
@@ -38,15 +47,16 @@ class Comment(models.Model):
         related_name="comments",
         null=True,
         blank=True
-    )
-    body = models.TextField('Izoh')
+        )  
+    body = models.TextField("Izoh")
     date = models.DateField(default=timezone.now)
-    def __str__(self):
+
+    def str(self):
         return f"{self.body[:20]}..."
 
     class Meta:
-        verbose_name = 'izoh'
-        verbose_name_plural = 'Izohlar'
+        verbose_name = "Izoh"
+        verbose_name_plural = "Izohlar"
 
 
 class Like(models.Model):
@@ -57,10 +67,10 @@ class Like(models.Model):
         related_name="likes",
         null=True,
         blank=True
-    )
+    )  
     user = models.ForeignKey(
         User,
-        verbose_name="Muallif",
+        verbose_name="Post",
         on_delete=models.SET_NULL,
         related_name="likes",
         null=True,
@@ -71,10 +81,8 @@ class Like(models.Model):
         verbose_name = "yoqimli"
         verbose_name_plural = "Yoqimlilar"
 
-
-    def __str__(self):
-        return f"{self.user.username}ga {self.post.title} yoqdi"
-
+    def str(self):
+        return f"{self.user.username}ga {self.post.title} yoqdi"  
 
 
 class Dislike(models.Model):
@@ -85,21 +93,19 @@ class Dislike(models.Model):
         related_name="dislikes",
         null=True,
         blank=True
-    )
+    )  
     user = models.ForeignKey(
         User,
-        verbose_name="Muallif",
+        verbose_name="Post",
         on_delete=models.SET_NULL,
         related_name="dislikes",
         null=True,
         blank=True
     )
 
-
     class Meta:
         verbose_name = "yoqimsiz"
         verbose_name_plural = "Yoqimsizlar"
 
-
-    def __str__(self):
-        return f"{self.user.username}ga {self.post.title} yoqmadi"        
+    def str(self):
+        return f"{self.user.username}ga {self.post.title} yoqmadi"
